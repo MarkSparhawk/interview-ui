@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import HomePage from './pages/HomePage';
+import AddJobPage from './pages/AddJobPage';
+import EditJobPage from './pages/EditJobPage';
+import {useState} from 'react';
+// import AddMoviePage from './pages/AddMoviePage';
+// import EditMoviePage from './pages/EditMoviePage';
 
 function App() {
+  const [jobToEdit, setJobToEdit] = useState();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <div className="App-header">
+		<Routes>
+          <Route path="/" element={<HomePage />}/>
+          <Route path="/dashboard" element={<Dashboard setJobToEdit={setJobToEdit}/>}/>
+          <Route path="/add-job" element={<AddJobPage />}/>
+          <Route path="/edit-job" element={<EditJobPage jobToEdit={jobToEdit}/>}/>
+
+          {/* <Route path="/add-movie" element={<AddMoviePage />}/>
+          <Route path="/edit-movie" element={ <EditMoviePage />}/> */}
+		  </Routes>
+          </div>
+      </Router>
     </div>
   );
 }
