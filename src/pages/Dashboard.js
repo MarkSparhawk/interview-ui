@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import JobList from '../components/JobList';
 import ButtonAppBar from '../components/AppBar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import Container from '@mui/material/Container';
 
 import { useState, useEffect } from 'react';
@@ -15,7 +15,7 @@ function Dashboard({jobToEdit, setJobToEdit}) {
     const navigate = useNavigate();
 
     const onDelete = async _id => {
-        const response = await fetch(`/jobs/${_id}`, {method: 'DELETE'});
+        const response = await fetch(`/api1/jobs/${_id}`, {method: 'DELETE'});
         if (response.status === 200) { 
             setJobs(jobs.filter(job => job.id !== _id));
         } else {
@@ -29,12 +29,15 @@ function Dashboard({jobToEdit, setJobToEdit}) {
 
     };
 
-    
+
     const loadJobs = async () => {
-        const response = await fetch('/jobs');
-        const jobs = await response.json();
-        console.log(jobs);
-        setJobs(jobs["res"]);
+        const response = await fetch('/api1/jobs');
+        var res = await response.json();
+        console.log(res);
+        
+        var jobs = res["res"]
+        console.log(jobs)
+        setJobs(jobs);
     }
         
     useEffect(() => {
@@ -49,11 +52,15 @@ function Dashboard({jobToEdit, setJobToEdit}) {
         <Box sx={{ flexGrow: 1 }}>
             <JobList jobs={jobs} onDelete={onDelete} onEdit={onEdit}></JobList>
             <Box pt={10}>    
-                <Button size="large" variant="contained" href="/add-job">Add Job</Button>
+                <Tooltip title="Allows you to add new jobs you’ve applied to so you can keep track of where you are in the candidate pipeline.">
+                    <Button size="large" variant="contained" href="/add-job">Add Job</Button>
+                </Tooltip>
+                
             </Box>
 
         </Box>
 
+        {/* <Modal> Hello </Modal> */}
         </>
     );
 }

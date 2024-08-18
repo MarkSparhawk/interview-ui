@@ -3,10 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 
@@ -14,17 +10,17 @@ export default function MenuAppBar({title}) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleMenu = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -38,7 +34,12 @@ export default function MenuAppBar({title}) {
           <Typography align="center" variant="h5" component="div" sx={{ flexGrow: 1 }}>
             {title}
           </Typography>
-          {auth && (
+          <Button
+                href="/dashboard"
+                variant="contained"
+            >Help</Button>
+
+          {/* {auth && (
             <div>
               <IconButton
                 size="large"
@@ -50,6 +51,7 @@ export default function MenuAppBar({title}) {
               >
                 <AccountCircle />
               </IconButton>
+              <Typography component="div" align="right" variant="h5">Help</Typography>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -69,7 +71,7 @@ export default function MenuAppBar({title}) {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
             </div>
-          )}
+          )} */}
         </Toolbar>
       </AppBar>
     </Box>

@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import HomePage from './pages/HomePage';
+import CreateAccountOptionsPage from './pages/CreateAccountOptionsPage';
 import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
 import {useState} from 'react';
@@ -17,6 +18,8 @@ function App() {
         <div className="App-header">
 		<Routes>
           <Route path="/" element={<HomePage />}/>
+          <Route path="/CreateAccountOptions" element={<CreateAccountOptionsPage />}/>
+
           <Route path="/dashboard" element={<Dashboard setJobToEdit={setJobToEdit}/>}/>
           <Route path="/add-job" element={<AddJobPage />}/>
           <Route path="/edit-job" element={<EditJobPage jobToEdit={jobToEdit}/>}/>
