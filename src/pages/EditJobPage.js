@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import ButtonAppBar from '../components/AppBar';
+import Button from '@mui/material/Button';
+
+
 export const EditJobPage = ({jobToEdit}) => {
 
     const [company, setCompany] = useState(jobToEdit.company);
@@ -12,7 +18,7 @@ export const EditJobPage = ({jobToEdit}) => {
 
     const editJob = async () => {
         const editedJob = {company, title, url, recruiter};
-        const response = await fetch(`/jobs/${jobToEdit.id}`, {
+        const response = await fetch(`/api1/jobs/${jobToEdit.id}`, {
             method: 'PUT',
             body: JSON.stringify(editedJob),
             headers: {
@@ -28,12 +34,18 @@ export const EditJobPage = ({jobToEdit}) => {
     };
 
     return (
+        <>
+        <Container maxWidth={false}>
+            <ButtonAppBar title="Add Job"></ButtonAppBar>
+        </Container>
+        <Box sx={{ flexGrow: 1 }}>
+
         <div>
             <h1>Update Job</h1>
             <div>
             <input
                 type="text"
-                placeholder="Company"
+                placeholder="Company Name"
                 value={company}
                 onChange={e => setCompany(e.target.value)} />
             </div>
@@ -41,32 +53,40 @@ export const EditJobPage = ({jobToEdit}) => {
 
             <input
                 type="text"
-                placeholder="Title"
+                placeholder="Job Title"
                 value={title}
                 onChange={e => setTitle(e.target.value)} />
             </div>
             <div>
             <input
                 type="text"
-                placeholder="Job Description URL"
+                placeholder="Website Address of Job Description (URL)"
                 value={url}
                 onChange={e => setURL(e.target.value)} />
             </div>
             <div>
             <input
                 type="recruiter"
-                placeholder="Recruiter"
+                placeholder="Recruiter's Name"
                 value={recruiter}
                 onChange={e => setRecruiter(e.target.value)} />
             </div>
             <div>
-            <button
+            <Button variant="contained"
                 onClick={editJob}
-            >Update</button>
-            <button>Cancel</button>
+            >Update
+            </Button>
+            &nbsp;
+            <Button 
+                variant="contained"
+                href="/dashboard"
+                >Cancel
+            </Button>
 
             </div>
         </div>
+        </Box>
+        </>
     );
 }
 

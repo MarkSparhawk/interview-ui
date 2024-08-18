@@ -6,6 +6,7 @@ function JobList({ jobs, onDelete, onEdit }) {
         <table id="jobs">
             <thead>
                 <tr>
+                    <th>&nbsp;</th>
                     <th>Company</th>
                     <th>URL</th>
                     <th>Recruiter</th>
